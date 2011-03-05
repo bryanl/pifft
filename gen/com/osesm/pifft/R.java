@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.pifft;
+package com.osesm.pifft;
 
 public final class R {
     public static final class attr {
