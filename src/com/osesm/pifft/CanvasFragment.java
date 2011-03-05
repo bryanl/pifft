@@ -1,12 +1,10 @@
 package com.osesm.pifft;
 
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebViewFragment;
 
 public class CanvasFragment extends Fragment {
 

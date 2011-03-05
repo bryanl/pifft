@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Pifft!</string>
-    <string name="app_name">Pifft</string>
+  <string
+    name="hello">Hello World, Pifft!</string>
+  <string
+    name="app_name">Pifft</string>
+
+  <string
+    name="empty">This is an empty list</string>
+
+  <string-array
+    name="countries_array">
+    <item>Bahrain</item>
+    <item>Bangladesh</item>
+    <item>Barbados</item>
+    <item>Belarus</item>
+    <item>Belgium</item>
+    <item>Belize</item>
+    <item>Benin</item>
+    <item>item1</item>
+    <item>item12</item>
+    <item>item13</item>
+    <item>item14</item>
+    <item>item15</item>
+    <item>item16</item>
+    <item>item17</item>
+    <item>item18</item>
+    <item>item19</item>
+    <item>item10</item>
+    <item>item111</item>
+    <item>item112</item>
+    <item>item113</item>
+    <item>item114</item>
+    <item>item115</item>
+    <item>item116</item>
+    <item>item117</item>
+
+    <item>item118</item>
+    <item>item119</item>
+    <item>item120</item>
+    <item>item121</item>
+    <item>item122</item>
+    <item>item123</item>
+    <item>item124</item>
+    <item>item125</item>
+    <item>item126</item>
+    <item>item127</item>
+    <item>item128</item>
+    <item>item129</item>
+    <item>item130</item>
+    <item>item131</item>
+    <item>item132</item>
+
+  </string-array>
+
 </resources>
