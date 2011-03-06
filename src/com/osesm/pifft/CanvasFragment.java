@@ -33,7 +33,10 @@ import android.view.ViewGroup;
 
 public class CanvasFragment extends Fragment {
 
-    private Preview mPreview;
+//    private Preview mPreview;
+    
+    private GLView glView;
+    
     Camera mCamera;
     int mNumberOfCameras;
     int mCameraCurrentlyLocked;
@@ -45,23 +48,26 @@ public class CanvasFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        glView = new GLView(this.getActivity());
+        
 
-        // Create a RelativeLayout container that will hold a SurfaceView,
-        // and set it as the content of our activity.
-        mPreview = new Preview(this.getActivity());
+    // Create a RelativeLayout container that will hold a SurfaceView,
+    // and set it as the content of our activity.
 
-        // Find the total number of cameras available
-        mNumberOfCameras = Camera.getNumberOfCameras();
+    // mPreview = new Preview(this.getActivity());
 
-        // Find the ID of the default camera
-        CameraInfo cameraInfo = new CameraInfo();
-        for (int i = 0; i < mNumberOfCameras; i++) {
-            Camera.getCameraInfo(i, cameraInfo);
-            if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
-                mDefaultCameraId = i;
-            }
-        }
-        setHasOptionsMenu(mNumberOfCameras > 1);
+    // Find the total number of cameras available
+    // mNumberOfCameras = Camera.getNumberOfCameras();
+
+    // Find the ID of the default camera
+    // CameraInfo cameraInfo = new CameraInfo();
+    // for (int i = 0; i < mNumberOfCameras; i++) {
+    // Camera.getCameraInfo(i, cameraInfo);
+    // if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
+    // mDefaultCameraId = i;
+    // }
+    // }
+    // setHasOptionsMenu(mNumberOfCameras > 1);
     }
 
     @Override
@@ -81,7 +87,7 @@ public class CanvasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return mPreview;
+        return glView;
     }
 
     @Override
@@ -89,9 +95,9 @@ public class CanvasFragment extends Fragment {
         super.onResume();
 
         // Open the default i.e. the first rear facing camera.
-        mCamera = Camera.open(mDefaultCameraId);
-        mCameraCurrentlyLocked = mDefaultCameraId;
-        mPreview.setCamera(mCamera);
+//        mCamera = Camera.open(mDefaultCameraId);
+//        mCameraCurrentlyLocked = mDefaultCameraId;
+//        mPreview.setCamera(mCamera);
     }
 
     @Override
@@ -100,54 +106,56 @@ public class CanvasFragment extends Fragment {
 
         // Because the Camera object is a shared resource, it's very
         // important to release it when the activity is paused.
-        if (mCamera != null) {
-            mPreview.setCamera(null);
-            mCamera.release();
-            mCamera = null;
-        }
+//        if (mCamera != null) {
+//            mPreview.setCamera(null);
+//            mCamera.release();
+//            mCamera = null;
+//        }
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mNumberOfCameras > 1) {
-            // Inflate our menu which can gather user input for switching camera
-            inflater.inflate(R.menu.camera_menu, menu);
-        } else {
+//        if (mNumberOfCameras > 1) {
+//            // Inflate our menu which can gather user input for switching camera
+//            inflater.inflate(R.menu.camera_menu, menu);
+//        } else {
             super.onCreateOptionsMenu(menu, inflater);
-        }
+//        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-        case R.id.switch_cam:
-            // Release this camera -> mCameraCurrentlyLocked
-            if (mCamera != null) {
-                mCamera.stopPreview();
-                mPreview.setCamera(null);
-                mCamera.release();
-                mCamera = null;
-            }
-
-            // Acquire the next camera and request Preview to reconfigure
-            // parameters.
-            mCamera = Camera
-                    .open((mCameraCurrentlyLocked + 1) % mNumberOfCameras);
-            mCameraCurrentlyLocked = (mCameraCurrentlyLocked + 1)
-                    % mNumberOfCameras;
-            mPreview.switchCamera(mCamera);
-
-            // Start the preview
-            mCamera.startPreview();
-            return true;
-        case android.R.id.home:
-            Intent intent = new Intent(this.getActivity(), Pifft.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+      return super.onOptionsItemSelected(item);
+      
+//        // Handle item selection
+//        switch (item.getItemId()) {
+//        case R.id.switch_cam:
+//            // Release this camera -> mCameraCurrentlyLocked
+//            if (mCamera != null) {
+//                mCamera.stopPreview();
+//                mPreview.setCamera(null);
+//                mCamera.release();
+//                mCamera = null;
+//            }
+//
+//            // Acquire the next camera and request Preview to reconfigure
+//            // parameters.
+//            mCamera = Camera
+//                    .open((mCameraCurrentlyLocked + 1) % mNumberOfCameras);
+//            mCameraCurrentlyLocked = (mCameraCurrentlyLocked + 1)
+//                    % mNumberOfCameras;
+//            mPreview.switchCamera(mCamera);
+//
+//            // Start the preview
+//            mCamera.startPreview();
+//            return true;
+//        case android.R.id.home:
+//            Intent intent = new Intent(this.getActivity(), Pifft.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            startActivity(intent);
+//
+//        default:
+//            return super.onOptionsItemSelected(item);
+//        }
     }
 }
