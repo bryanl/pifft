@@ -16,12 +16,16 @@ public class GLRenderer implements GLSurfaceView.Renderer {
   private long startTime;
   private long fpsStartTime;
   private int numFrames;
+  
+  private boolean SHOW_FPS = true; 
 
   GLRenderer(Context context) {
     this.context = context;
   }
 
   public void onDrawFrame(GL10 gl) {
+    
+    
     // Clear the screen to black
     gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     // Position model so we can see it
@@ -36,6 +40,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     cube.draw(gl);
     
+    if (SHOW_FPS) {
+    
     numFrames++;
     long fpsElapsed = System.currentTimeMillis() - fpsStartTime;
     if (fpsElapsed > 5 * 1000) { // every 5 seconds
@@ -43,6 +49,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
       Log.d(TAG, "Frames per second: " + fps + " (" + numFrames + " frames in " + fpsElapsed + " ms)");
       fpsStartTime = System.currentTimeMillis();
       numFrames = 0;
+    }
+    
     }
 
   }
@@ -57,9 +65,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
   }
 
   public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    
+
     boolean SEE_THRU = true;
-    
+
     gl.glEnable(GL10.GL_DEPTH_TEST);
     gl.glDepthFunc(GL10.GL_LEQUAL);
     gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
