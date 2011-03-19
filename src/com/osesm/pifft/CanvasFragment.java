@@ -35,7 +35,7 @@ public class CanvasFragment extends Fragment {
 
 //    private Preview mPreview;
     
-    private GLView glView;
+    private View glView;
     
     Camera mCamera;
     int mNumberOfCameras;
@@ -47,8 +47,9 @@ public class CanvasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        glView = new GLView(this.getActivity());
+        
+//        glView = new GLView(this.getActivity());
+        glView = ((Pifft) this.getActivity()).getGdxView();
         
 
     // Create a RelativeLayout container that will hold a SurfaceView,
